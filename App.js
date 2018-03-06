@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
   },
   row: {
     flex: 1,
-    backgroundColor: 'pink',
     flexDirection: 'row',
+    borderColor: '#fff',
+    borderBottomWidth: 1,
   },
 });
 
@@ -61,6 +62,11 @@ const App = () => (
         <Button text="2" />
         <Button text="1" />
         <Button text="+" />
+      </View>
+      <View style={styles.row}>
+        <Button text="0" />
+        <Button text="." />
+        <Button text="enter"  special/>
       </View>
     </View>
   </View>
