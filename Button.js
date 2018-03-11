@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const baseConteiner = {
   alignItems: 'center',
@@ -30,10 +30,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ text, special }) => (
-  <View style={special ? styles.specialConteiner : styles.container}>
+const Button = ({ text, special, onPress }) => (
+  <TouchableOpacity
+    onPress={() => onPress(text)}
+    style={special ? styles.specialConteiner : styles.container}
+  >
     <Text style={special ? styles.specialText : styles.text}>{text}</Text>
-  </View>
+  </TouchableOpacity>
 );
 
 export default Button;
