@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Button from './Button';
-import { pressNum } from './modules';
+import { pressNum, enter } from './modules';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const App = ({ currentNumber, pressNumWithDispatch }) => (
+const App = ({ calculatorState: { stack, inputState }, pressNumWithDispatch, enterAction }) => (
   <View style={styles.container}>
     <View style={styles.top}>
-      <Text style={styles.number}>0</Text>
-      <Text style={styles.number}>0</Text>
-      <Text style={styles.number}>{currentNumber}</Text>
+      <Text style={styles.number}>{stack[2] || 0}</Text>
+      <Text style={styles.number}>{stack[1] || 0}</Text>
+      <Text style={styles.number}>{stack[0] || 0}</Text>
     </View>
     <View style={styles.bottom}>
       <View style={styles.row}>
@@ -69,18 +69,19 @@ const App = ({ currentNumber, pressNumWithDispatch }) => (
       <View style={styles.row}>
         <Button text="0" onPress={pressNumWithDispatch} />
         <Button text="." />
-        <Button text="enter" special />
+        <Button text="enter" onPress={enterAction} special />
       </View>
     </View>
   </View>
 );
 
 export default connect(
-  state => ({ currentNumber: state }),
+  state => ({ calculatorState: state }),
   dispatch =>
     bindActionCreators(
       {
         pressNumWithDispatch: pressNum,
+        enterAction: enter,
       },
       dispatch,
     ),
